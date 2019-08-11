@@ -3,6 +3,7 @@ require("dotenv").config();
 var cloudinary = require("cloudinary").v2;
 const express = require("express");
 const mongoose = require("mongoose");
+const auth = require("./routes/auth");
 const app = express();
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
@@ -24,6 +25,7 @@ function upload() {
 app.get("/", (req, res) => {
   res.send("Server started");
 });
+app.use("/auth", auth);
 app.listen(process.env.PORT, () => {
   console.log("Server started");
 });
